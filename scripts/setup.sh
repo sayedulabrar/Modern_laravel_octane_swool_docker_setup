@@ -48,6 +48,11 @@ if ! docker compose version &>/dev/null; then
 fi
 success "Docker $(docker --version | cut -d' ' -f3 | tr -d ',')"
 
+# ── Make scripts executable ───────────────────────────────────────────────────
+log "Setting execute permissions on scripts..."
+chmod +x docker/entrypoint.sh scripts/deploy.sh
+success "Scripts are executable"
+
 # ── Copy .env ─────────────────────────────────────────────────────────────────
 if [ ! -f .env ]; then
     log "Copying .env.example → .env"
